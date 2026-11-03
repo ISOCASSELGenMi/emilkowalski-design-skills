@@ -1,0 +1,26 @@
+name: Sync upstream
+
+on:
+  schedule:
+    - cron: "0 19 */3 * *"   # 每月 1、4、7…日 19:00 UTC（台灣隔天 03:00）
+  workflow_dispatch:          # 也可以在 Actions 頁面手動按執行
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Merge upstream main
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git remote add upstream https://github.com/emilkowalski/skills.git
+          git fetch upstream main
+          git merge upstream/main --no-edit -m "chore: sync from emilkowalski/skills"
+          git push origin HEAD:main
