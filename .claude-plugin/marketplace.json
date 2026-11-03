@@ -1,0 +1,11 @@
+{
+  "name": "emil-design-skills-market",
+  "owner": { "name": "ISOCASSELGenMi" },
+  "plugins": [
+    {
+      "name": "emil-design-skills",
+      "source": "./",
+      "description": "Emil Kowalski's skills for designers and engineers (auto-synced from emilkowalski/skills)"
+    }
+  ]
+}
